@@ -2,9 +2,10 @@ package com.softnovo.domain;
 
 import com.google.common.collect.Lists;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     private Long id; //订单Id
     private String orderNumber; //订单编号
     private String deliveryAddress; //物流地址
