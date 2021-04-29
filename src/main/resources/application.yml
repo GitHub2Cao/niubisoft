@@ -22,6 +22,11 @@ spring:
         max-idle: 8 # 连接池中的最大空闲连接 默认 8
         min-idle: 0  # 连接池中的最小空闲连接 默认 0
 
+  security:
+    user:
+      name: springboot
+      password: 123456
+
 mybatis:
   config-location: classpath:spring/mybatis-config.xml
   mapper-locations: classpath:mybatis/*.xml
