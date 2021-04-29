@@ -27,10 +27,9 @@ spring:
       name: springboot
       password: 123456
 
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
+#springcss:
+#  order:
+#    point: 10
 
 mybatis:
   config-location: classpath:spring/mybatis-config.xml

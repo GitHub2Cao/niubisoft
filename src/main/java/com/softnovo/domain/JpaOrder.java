@@ -10,12 +10,22 @@ import java.util.List;
 //@Proxy(lazy = false)
 public class JpaOrder implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    public JpaOrder() {
+
+    }
+
+    public JpaOrder(String orderNumber, String deliveryAddress) {
+        this.orderNumber = orderNumber;
+        this.deliveryAddress = deliveryAddress;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNumber;
     private String deliveryAddress;
-    @ManyToMany(targetEntity=JpaGoods.class)
+    @ManyToMany(targetEntity = JpaGoods.class)
     @JoinTable(name = "order_goods", joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "goods_id", referencedColumnName = "id"))
     private List<JpaGoods> goods = new ArrayList<>();
 
