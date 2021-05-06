@@ -1,3 +1,6 @@
+server:
+  port: 8888
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -26,11 +29,20 @@ spring:
     user:
       name: springboot
       password: 123456
-
   mvc:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
+
+app:
+  id: 1234
+
+apollo:
+  meta: http://127.0.0.1:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
 
 mybatis:
   config-location: classpath:spring/mybatis-config.xml
