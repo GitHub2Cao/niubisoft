@@ -21,9 +21,9 @@ public class ProxyBean implements InvocationHandler {
     public static Object getProxyBean(Object target, Interceptor interceptor) {
         ProxyBean proxyBean = new ProxyBean();
         // 保存被代理对象
-        proxyBean.target = target;
+        proxyBean.setTarget(target);
         // 保存拦截器
-        proxyBean.interceptor = interceptor;
+        proxyBean.setInterceptor(interceptor);
         // 生成代理对象
         return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), proxyBean);
         // 返回代理对象
@@ -43,14 +43,14 @@ public class ProxyBean implements InvocationHandler {
         boolean exceptionFlag = false;
         Invocation invocation = new Invocation(target, method, args);
         Object retObj = null;
+        interceptor.before();
         try {
-            if (interceptor.before()) {
+            if (interceptor.useAround()) {
                 retObj = interceptor.around(invocation);
             } else {
                 retObj = method.invoke(target, args);
             }
         } catch (Exception ex) {
-            //产生异常
             exceptionFlag = true;
         }
         interceptor.after();
@@ -61,5 +61,21 @@ public class ProxyBean implements InvocationHandler {
             return retObj;
         }
         return null;
+    }
+
+    public Object getTarget() {
+        return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+
+    public Interceptor getInterceptor() {
+        return interceptor;
+    }
+
+    public void setInterceptor(Interceptor interceptor) {
+        this.interceptor = interceptor;
     }
 }

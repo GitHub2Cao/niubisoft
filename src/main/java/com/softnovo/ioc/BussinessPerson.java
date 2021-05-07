@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
-public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware, ApplicationContextAware, InitializingBean, DisposableBean, BeanPostProcessor {
+public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware, ApplicationContextAware,
+        InitializingBean, DisposableBean, BeanPostProcessor, ApplicationListener<ContextRefreshedEvent>, Ordered {
     private Animal animal = null;
 
     public BussinessPerson() {
@@ -48,10 +52,15 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
     }
 
     @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        System.out.println("-- ApplicationListener -- onApplicationEvent -- " + event);
+    }
+
+    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("-- BeanPostProcessor -- postProcessBeforeInitialization -- ");
-        System.out.println("++ beanName -- " + beanName);
-        System.out.println("++ Object -- " + bean.getClass().getName());
+        System.out.println("-- 22222222BeanPostProcessor -- postProcessBeforeInitialization -- ");
+        System.out.println("++ 22222222beanName -- " + beanName);
+        System.out.println("++ 22222222Object -- " + bean.getClass().getName());
         return bean;
     }
 
@@ -67,9 +76,9 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("-- BeanPostProcessor -- postProcessBeforeInitialization -- ");
-        System.out.println("++ beanName -- " + beanName);
-        System.out.println("++ Object -- " + bean.getClass().getName());
+        System.out.println("-- 22222222BeanPostProcessor -- postProcessBeforeInitialization -- ");
+        System.out.println("++ 22222222beanName -- " + beanName);
+        System.out.println("++ 22222222Object -- " + bean.getClass().getName());
         return bean;
     }
 
@@ -81,5 +90,10 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
     @Override
     public void destroy() throws Exception {
         System.out.println("-- DisposableBean -- destroy");
+    }
+
+    @Override
+    public int getOrder() {
+        return 0;
     }
 }

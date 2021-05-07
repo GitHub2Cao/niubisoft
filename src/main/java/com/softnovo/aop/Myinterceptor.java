@@ -6,6 +6,12 @@ import java.lang.reflect.InvocationTargetException;
  * @author cgm
  */
 public class Myinterceptor implements Interceptor {
+    private final boolean useAround;
+
+    public Myinterceptor(boolean useAround) {
+        this.useAround = useAround;
+    }
+
     @Override
     public boolean before() {
         System.out.println("before .......");
@@ -37,6 +43,6 @@ public class Myinterceptor implements Interceptor {
 
     @Override
     public boolean useAround() {
-        return true;
+        return useAround;
     }
 }
