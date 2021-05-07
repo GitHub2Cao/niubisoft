@@ -1,4 +1,4 @@
-package com.softnovo.ioc;
+package com.softnovo.ioc.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
