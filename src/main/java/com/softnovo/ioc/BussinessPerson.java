@@ -2,7 +2,6 @@ package com.softnovo.ioc;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
@@ -11,14 +10,21 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import java.util.List;
 
+/**
+ * @author cgm
+ */
 @Component
 public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware, ApplicationContextAware,
         InitializingBean, DisposableBean, BeanPostProcessor, ApplicationListener<ContextRefreshedEvent>, Ordered {
-    private Animal animal = null;
+    @Resource
+    private List<Animal> animalList;
 
     public BussinessPerson() {
         System.out.println("构造器初始化完成");
@@ -26,14 +32,16 @@ public class BussinessPerson implements Person, BeanNameAware, BeanFactoryAware,
 
     @Override
     public void service() {
-        animal.use();
+        if (!CollectionUtils.isEmpty(animalList)) {
+            animalList.forEach(Animal::use);
+        }
     }
 
     @Override
-    @Autowired
+    //@Autowired
     public void setAnimal(@Qualifier("dog") Animal animal) {
         System.out.println("延迟依赖注入");
-        this.animal = animal;
+        //this.animal = animal;
     }
 
     @Override

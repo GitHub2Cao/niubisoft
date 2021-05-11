@@ -13,8 +13,8 @@ import java.util.concurrent.ExecutionException;
 public class Test {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-        //Person person = ctx.getBean(BussinessPerson.class);
-        //person.service();
+        Person person = ctx.getBean(BussinessPerson.class);
+        person.service();
 
         ScopeBean scopeBeanl = ctx.getBean(ScopeBean.class);
         ServiceImpl serviceImpl = ctx.getBean(ServiceImpl.class);

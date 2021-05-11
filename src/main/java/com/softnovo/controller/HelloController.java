@@ -19,10 +19,10 @@ public class HelloController {
     private String port;
     //@Value("${timeout}")
     private Long timeout;
-    @Value("${name}")
+    //@Value("${name}")
     private String name;
 
-    @Value("${timeout}")
+    //@Value("${timeout}")
     public void setTimeout(Long timeout) {
         this.timeout = timeout;
         System.out.println("===== timeout " + timeout);

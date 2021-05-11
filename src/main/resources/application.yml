@@ -69,3 +69,9 @@ rocketmq:
       test-consumer-group:
         topic1: false # 关闭 test-consumer-group 对 topic1 的监听消费
 
+logging:
+  level:
+    root: debug
+    com.softnovo: debug
+  file:
+    name: /Users/zcy/logs/niubisoft

@@ -17,7 +17,6 @@ public class MyRegistryPostProcessor implements BeanDefinitionRegistryPostProces
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         RootBeanDefinition beanDefinition = new RootBeanDefinition(BussinessPerson.class);
         System.out.println("MyRegistryPostProcessor---++++++---postProcessBeanDefinitionRegistry");
-        registry.registerBeanDefinition("niubiperson", beanDefinition);
     }
 
     @Override
